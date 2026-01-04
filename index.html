@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 生日快乐</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 花瓣飘落容器 -->
+    <div class="petals-container" id="petals"></div>
+    
+    <!-- 烟花容器 -->
+    <canvas id="fireworks"></canvas>
+    
+    <!-- 烟花文字提示 -->
+    <div class="firework-text hidden" id="fireworkText">
+        <p>请欣赏</p>
+        <h2>2026 年第一场电子烟花 🎆</h2>
+    </div>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+        <!-- 开场欢迎 -->
+        <section class="welcome-section" id="welcome">
+            <div class="welcome-text">
+                <span class="small-text">献给最爱笑的你</span>
+                <h1 class="name">黄毓婷</h1>
+                <p class="birthday-wish">生日快乐</p>
+                <button class="start-btn" id="startBtn">
+                    <span>打开礼物</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- 蛋糕区域 -->
+        <section class="cake-section hidden" id="cakeSection">
+            <p class="blow-hint" id="blowHint">✨ 点击蛋糕许个愿，然后吹灭蜡烛吧 ✨</p>
+            <div class="cake-container" id="cake">
+                <div class="cake">
+                    <!-- 蜡烛 -->
+                    <div class="candles">
+                        <div class="candle">
+                            <div class="flame" id="flame1"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="flame" id="flame2"></div>
+                        </div>
+                        <div class="candle">
+                            <div class="flame" id="flame3"></div>
+                        </div>
+                    </div>
+                    <!-- 蛋糕层 -->
+                    <div class="cake-top"></div>
+                    <div class="cake-middle"></div>
+                    <div class="cake-bottom"></div>
+                    <!-- 装饰 -->
+                    <div class="decorations">
+                        <span class="deco deco-1">🌸</span>
+                        <span class="deco deco-2">🌷</span>
+                        <span class="deco deco-3">🌺</span>
+                        <span class="deco deco-4">💐</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 照片画廊 -->
+        <section class="gallery-section hidden" id="gallery">
+            <h2 class="section-title">愿你永远这样笑 🌸</h2>
+            <div class="gallery-container">
+                <div class="photo-card" style="--delay: 0.1s">
+                    <img src="images/photo1.png" alt="照片1" onerror="this.src='https://picsum.photos/400/300?random=1'">
+                </div>
+                <div class="photo-card" style="--delay: 0.2s">
+                    <img src="images/photo2.png" alt="照片2" onerror="this.src='https://picsum.photos/400/300?random=2'">
+                </div>
+                <div class="photo-card" style="--delay: 0.3s">
+                    <img src="images/photo3.png" alt="照片3" onerror="this.src='https://picsum.photos/400/300?random=3'">
+                </div>
+                <div class="photo-card" style="--delay: 0.4s">
+                    <img src="images/photo4.png" alt="照片4" onerror="this.src='https://picsum.photos/400/300?random=4'">
+                </div>
+                <div class="photo-card" style="--delay: 0.5s">
+                    <img src="images/photo5.png" alt="照片5" onerror="this.src='https://picsum.photos/400/300?random=5'">
+                </div>
+                <div class="photo-card" style="--delay: 0.6s">
+                    <img src="images/photo6.png" alt="照片6" onerror="this.src='https://picsum.photos/400/300?random=6'">
+                </div>
+            </div>
+        </section>
+
+        <!-- 祝福语 -->
+        <section class="message-section hidden" id="message">
+            <div class="message-card">
+                <div class="message-icon">💌</div>
+                <h2>老同学</h2>
+                <p class="message-text">
+                    在这个特别的日子里，愿你像花儿一样绽放，清风拂面，岁岁无忧，被阳光和所有美好包围。
+                    <br><br>
+                    愿你的每一天都充满欢笑，每一个梦想都能实现。
+                    <br><br>
+                    生日快乐！永远开心！身体健康！万事如意！🎂🌸
+                </p>
+                <div class="signature">—— 你的老同学</div>
+            </div>
+        </section>
+
+        <!-- 结尾 -->
+        <section class="ending-section hidden" id="ending">
+            <div class="ending-content">
+                <span class="big-emoji">🎉</span>
+                <h2>Happy Birthday!</h2>
+                <p>愿你岁岁常欢愉，年年皆胜意</p>
+                
+                <!-- 心里话入口 -->
+                <div class="secret-entry">
+                    <span class="secret-link" id="secretLink">
+                        <span class="secret-icon">💭</span>
+                        还有一些话想说...
+                    </span>
+                </div>
+                
+                <button class="replay-btn" id="replayBtn">再看一次</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 心里话弹窗 -->
+    <div class="secret-modal hidden" id="secretModal">
+        <div class="secret-overlay" id="secretOverlay"></div>
+        <div class="secret-content">
+            <button class="secret-close" id="secretClose">×</button>
+            
+            <!-- 答题区域 -->
+            <div class="quiz-section" id="quizSection">
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <span class="quiz-icon">🔐</span>
+                        <h3>关于我们的回忆</h3>
+                        <p class="quiz-subtitle">你还记得吗？</p>
+                    </div>
+                    
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">1 / 4</span>
+                    </div>
+                    
+                    <div class="quiz-question" id="quizQuestion">
+                        <!-- 题目会通过 JS 动态填充 -->
+                    </div>
+                    
+                    <div class="quiz-options" id="quizOptions">
+                        <!-- 选项会通过 JS 动态填充 -->
+                    </div>
+                    
+                    <div class="quiz-feedback hidden" id="quizFeedback">
+                        <span class="feedback-icon"></span>
+                        <span class="feedback-text"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 回忆场景（答对后显示） -->
+            <div class="memory-section hidden" id="memorySection">
+                <div class="memory-card">
+                    <div class="memory-icon" id="memoryIcon">🌸</div>
+                    <div class="memory-text" id="memoryText"></div>
+                    <button class="memory-next-btn" id="memoryNextBtn">继续 →</button>
+                </div>
+            </div>
+            
+            <!-- 心里话（全部答对后显示） -->
+            <div class="secret-letter hidden" id="secretLetter">
+                <div class="letter-header">🌙</div>
+                <h3>写在最后</h3>
+                <div class="letter-body">
+                    <p>
+                        后来上了大学，大家慢慢就没了联系。可能是距离远了，接触少了，也可能是大家都长大了，懂得了边界感。
+                    </p>
+                    <p>
+                        每一次想主动联系，却总觉得很怪、很突兀。偶尔制造请求帮忙的机会联系你，但再也回不到以前的感觉，很生分、很客气，也不知道怎么开口。
+                    </p>
+                    <p>
+                        直到有一天，刷到一篇文章写道：<em>"如果你也想念谁，就现在。别等合适的时候，没有比现在更合适的时候了。打几个字，发出去。最坏的结果，不过是维持现状。但最好的结果，是你重新找回了一个很重要的人。"</em>
+                    </p>
+                    <p>
+                        这句话鼓励了我，让我像刚学会说话的孩子一样，勇敢却笨拙地找你聊天。
+                    </p>
+                    <p>
+                        说真的，每次找你聊天我都要想好久，做好久思想工作。大家都说我是社牛，可只有我自己清楚，面对在意的女孩子，我是开不了口的。
+                    </p>
+                    <p>
+                        但还好你超有礼貌，句句有回应，让我没那么尴尬。
+                    </p>
+                    <p>
+                        其实我知道，这种关系可能会打扰到你。所以写到这里，不管结果如何，我心里的秘密又少了一个，已经没有遗憾了。
+                    </p>
+                    <p style="margin-top: 25px; text-align: center; font-size: 1.1rem;">
+                        老同学，能再和你聊天，已经很开心啦。
+                    </p>
+                    <p style="text-align: center; color: #6b7280; font-size: 0.95rem;">
+                        不管怎样，谢谢你看到这里。
+                    </p>
+                    <p style="text-align: center; margin-top: 15px;">
+                        🎂 生日快乐
+                    </p>
+                </div>
+                <div class="letter-footer">
+                    <span>—— 那个曾经意气风发的少年</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

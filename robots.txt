@@ -1,0 +1,4 @@
+# 阻止所有搜索引擎索引
+User-agent: *
+Disallow: /
+
