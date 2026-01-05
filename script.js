@@ -206,23 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
             fireworkText.classList.add('hidden');
         }, 3800);
 
-        // 显示照片墙（烟花完全结束后）
+        // 烟花结束后，一次性展示所有内容，让用户自己滑动查看
         setTimeout(() => {
+            cakeSection.classList.add('hidden');
             gallery.classList.remove('hidden');
+            message.classList.remove('hidden');
+            ending.classList.remove('hidden');
             gallery.scrollIntoView({ behavior: 'smooth' });
         }, 8000);
-
-        // 显示祝福语（让用户看完照片）
-        setTimeout(() => {
-            message.classList.remove('hidden');
-            message.scrollIntoView({ behavior: 'smooth' });
-        }, 15000);
-
-        // 显示结尾（让用户看完祝福语）
-        setTimeout(() => {
-            ending.classList.remove('hidden');
-            ending.scrollIntoView({ behavior: 'smooth' });
-        }, 21000);
     });
 
     // 重新播放
@@ -411,18 +402,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 
+    // ===== 入口验证 =====
+    const gateSection = document.getElementById('gateSection');
+    const gateInput = document.getElementById('gateInput');
+    const gateSubmit = document.getElementById('gateSubmit');
+    const gateFeedback = document.getElementById('gateFeedback');
+    const lyricSection = document.getElementById('lyricSection');
+    const lyricContinue = document.getElementById('lyricContinue');
+
+    // 验证歌曲名
+    function checkGate() {
+        const answer = gateInput.value.trim();
+        if (answer === '讲你知') {
+            // 答对了，显示歌词页面
+            gateSection.classList.add('completed');
+            setTimeout(() => {
+                gateSection.classList.add('hidden');
+                lyricSection.classList.remove('hidden');
+            }, 500);
+        } else {
+            // 答错了
+            gateFeedback.classList.remove('hidden');
+            gateInput.classList.add('shake');
+            setTimeout(() => {
+                gateInput.classList.remove('shake');
+            }, 500);
+        }
+    }
+
+    gateSubmit.addEventListener('click', checkGate);
+    gateInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            checkGate();
+        }
+    });
+
+    // 歌词页面点击继续
+    lyricContinue.addEventListener('click', () => {
+        lyricSection.classList.add('completed');
+        setTimeout(() => {
+            lyricSection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            renderQuiz();
+        }, 500);
+    });
+
     // 点击入口打开弹窗
     secretLink.addEventListener('click', () => {
         secretModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-        // 重置答题状态
+        // 重置所有状态
         currentQuiz = 0;
-        quizSection.classList.remove('hidden', 'completed');
+        gateSection.classList.remove('hidden', 'completed');
+        gateInput.value = '';
+        gateFeedback.classList.add('hidden');
+        lyricSection.classList.add('hidden');
+        lyricSection.classList.remove('completed');
+        quizSection.classList.add('hidden');
+        quizSection.classList.remove('completed');
         memorySection.classList.add('hidden');
         memorySection.classList.remove('completed');
         secretLetter.classList.add('hidden');
         secretLetter.classList.remove('reveal');
-        renderQuiz();
     });
 
     // 关闭弹窗
