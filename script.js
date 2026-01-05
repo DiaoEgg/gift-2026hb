@@ -1,3 +1,9 @@
+// ===== 预加载背景音乐 =====
+const bgMusic = document.getElementById('bgMusic');
+if (bgMusic) {
+    bgMusic.load();  // 页面打开时立即开始加载
+}
+
 // ===== 花瓣飘落效果 =====
 function createPetals() {
     const container = document.getElementById('petals');
@@ -451,6 +457,8 @@ document.addEventListener('DOMContentLoaded', () => {
     secretLink.addEventListener('click', () => {
         secretModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+        // 播放背景音乐
+        bgMusic.play().catch(() => {});  // 忽略自动播放限制错误
         // 重置所有状态
         currentQuiz = 0;
         gateSection.classList.remove('hidden', 'completed');
@@ -470,6 +478,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeSecret() {
         secretModal.classList.add('hidden');
         document.body.style.overflow = '';
+        // 停止音乐
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
     }
 
     secretClose.addEventListener('click', closeSecret);
