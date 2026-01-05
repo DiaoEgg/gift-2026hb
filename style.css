@@ -708,14 +708,14 @@ section {
 .gate-card {
     background: linear-gradient(145deg, #fffbf5 0%, #fef3f2 100%);
     border-radius: 24px;
-    padding: 40px 30px;
+    padding: 35px 25px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
 
 .gate-icon {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 15px;
 }
 
 .gate-card h3 {
@@ -1120,6 +1120,75 @@ section {
     
     .message-card {
         padding: 30px 25px;
+    }
+    
+    /* 弹窗手机端优化 */
+    .secret-modal {
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 50px;
+    }
+    
+    .secret-content {
+        max-height: calc(100vh - 80px);
+    }
+    
+    .gate-card {
+        padding: 25px 20px;
+    }
+    
+    .gate-icon {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+    
+    .gate-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+    
+    .gate-hint {
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .gate-input-wrap {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .gate-input {
+        width: 100%;
+    }
+    
+    .gate-submit {
+        width: 100%;
+    }
+    
+    .gate-tip {
+        margin-top: 15px;
+        padding-top: 15px;
+        font-size: 0.8rem;
+    }
+    
+    .lyric-card {
+        padding: 35px 25px;
+    }
+    
+    .lyric-main {
+        font-size: 1.3rem;
+    }
+    
+    .quiz-card {
+        padding: 25px 20px;
+    }
+    
+    .memory-card {
+        padding: 30px 20px;
+    }
+    
+    .secret-letter {
+        padding: 30px 20px;
     }
 }
 
