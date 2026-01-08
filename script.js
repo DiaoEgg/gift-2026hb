@@ -249,35 +249,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== 答题系统 =====
     const quizQuestions = [
         {
-            question: "我们第一次有交集，可能是因为什么游戏？",
+            question: "你们第一次有交集，可能是由于什么活动？",
             options: ["真心话大冒险", "谁是卧底", "国王与天使", "狼人杀"],
             correct: 2,  // 国王与天使
             icon: "👼",
-            memory: `<p>高一下学期，我们在七班成了同班同学。</p>
-                     <p>说实话，第一次有交集是什么时候，我已经记不太清了。只记得有一次玩"国王与天使"的游戏，你是我的天使。</p>
-                     <p>也许，就是从那时候开始，我们慢慢有了交集吧。</p>
-                     <p>后来我们也有学习上的探讨，体育课上偶尔也会一起打乒乓球...</p>`
+            memory: `<p>高一下学期，你们在七班成了同班同学。</p>
+                     <p>说实话，第一次有交集是什么时候，他已经记不太清了。只记得有一次玩"国王与天使"的游戏，你是他的天使。</p>
+                     <p>也许，就是从那时候开始，你们慢慢有了交集吧。</p>
+                     <p>后来你们也有学习上的探讨，体育课上偶尔也会一起打乒乓球...</p>`
         },
         {
-            question: "那时候早自习查校服很严，你曾经帮过我什么？",
-            options: ["帮我遮挡", "借我外套", "幸灾乐祸", "没帮过"],
+            question: "那时候早自习查校服很严，你曾经帮过他什么？",
+            options: ["帮他遮挡", "借他外套", "幸灾乐祸", "没帮过"],
             correct: 1,  // 借我外套
             icon: "🧥",
             memory: `<p>那时候上早自习，查校服查得严。</p>
-                     <p>有一次我忘了穿，你刚好在我身旁就把你的外套递给我。</p>
+                     <p>有一次他忘了穿，你刚好在他身旁就把你的外套递给他。</p>
                      <p>那时候的单纯，真的很美好。</p>`
         },
         {
-            question: "中秋前后的一次班会，我收到过你的礼物，你还记得吗？",
+            question: "中秋前后的一次班会，他收到过你的礼物，你还记得吗？",
             options: ["一张贺卡", "一块月饼", "一颗糖", "没有的事"],
             correct: 1,  // 手工月饼
             icon: "🥮",
-            memory: `<p>印象最深的是有一次班会，恰好在中秋前后，也恰好赶上我的生日，班主任给我过生日，带着我们做手工月饼。</p>
-                     <p>你做了一个，送给了我。</p>
-                     <p>我还记得当时自己特别害羞，接过来就一口闷了。虽然有点尴尬，但真的很开心。</p>`
+            memory: `<p>印象最深的是有一次班会，恰好在中秋前后，也恰好赶上他的生日，班主任给他过生日，带着你们做手工月饼。</p>
+                     <p>你做了一个，送给了他。</p>
+                     <p>他还记得当时自己特别害羞，接过来就一口闷了。虽然有点尴尬，但真的很开心。</p>`
         },
         {
-            question: "后来我把你QQ删了，还记得说什么时候再加回来吗？",
+            question: "后来他把你QQ删了，还记得说什么时候再加回来吗？",
             options: ["等放假的时候", "等考上大学", "等考进重点班", "等毕业以后"],
             correct: 2,  // 等考进重点班
             icon: "💬",
@@ -410,6 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== 入口验证 =====
+    const monologueSection = document.getElementById('monologueSection');
+    const monologueContinue = document.getElementById('monologueContinue');
     const gateSection = document.getElementById('gateSection');
     const gateInput = document.getElementById('gateInput');
     const gateSubmit = document.getElementById('gateSubmit');
@@ -444,6 +446,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 独白页面点击继续
+    monologueContinue.addEventListener('click', () => {
+        monologueSection.classList.add('completed');
+        setTimeout(() => {
+            monologueSection.classList.add('hidden');
+            gateSection.classList.remove('hidden');
+        }, 500);
+    });
+
     // 歌词页面点击继续
     lyricContinue.addEventListener('click', () => {
         lyricSection.classList.add('completed');
@@ -460,9 +471,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
         // 播放背景音乐
         bgMusic.play().catch(() => {});  // 忽略自动播放限制错误
-        // 重置所有状态
+        // 重置所有状态，先显示独白
         currentQuiz = 0;
-        gateSection.classList.remove('hidden', 'completed');
+        monologueSection.classList.remove('hidden', 'completed');
+        gateSection.classList.add('hidden');
+        gateSection.classList.remove('completed');
         gateInput.value = '';
         gateFeedback.classList.add('hidden');
         lyricSection.classList.add('hidden');
